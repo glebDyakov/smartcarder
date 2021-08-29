@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:id="@+id/smartCardImg"
+        android:layout_width="377dp"
+        android:layout_height="163dp"
+        android:layout_margin="75dp"
+        android:contentDescription="@string/mockContentDescription"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/smartCardName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.196"
+        tools:src="@drawable/cross"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/smartCardName"
+        android:layout_width="310dp"
+        android:layout_height="40dp"
+        android:text="Перекрёсток"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/barCodeText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/barCodeImg"
+        android:layout_width="314dp"
+        android:layout_height="96dp"
+        android:layout_margin="175dp"
+        android:alpha="255"
+        android:contentDescription="@string/mockContentDescription"
+        android:translationY="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/smartCardName"
+        app:layout_constraintVertical_bias="0.766"
+        tools:src="@drawable/barcode"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/barCodeText"
+        android:layout_width="310dp"
+        android:layout_height="40dp"
+        android:text="978123456789"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.898" />
+</androidx.constraintlayout.widget.ConstraintLayout>
