@@ -105,24 +105,27 @@ public class CardsListActivity extends AppCompatActivity {
                 );
                 LinearLayout scrollLayout = findViewById(R.id.layoutOfCards);
                 scrollLayout.addView(bindingCard);
+
+//                bindingCard.setContentDescription(String.valueOf(mycards.getInt(0)));
+                bindingCard.setContentDescription(String.valueOf(mycards.getString(1)));
+
+
                 bindingCard.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent switchActivityIntent = new Intent(CardsListActivity.this, MainActivity.class);
-                        switchActivityIntent.putExtra("currentCardName", mycards.getString(1));
-                        switchActivityIntent.putExtra("currentBarCode", mycards.getString(2));
-                        switchActivityIntent.putExtra("currentCardType", mycards.getString(3));
+//                        switchActivityIntent.putExtra("currentCardName", mycards.getString(1));
+//                        switchActivityIntent.putExtra("currentBarCode", mycards.getString(2));
+//                        switchActivityIntent.putExtra("currentCardType", mycards.getString(3));
+//                        Integer intId = Integer.parseInt(view.getContentDescription().toString());
+//                        switchActivityIntent.putExtra("currentCardId: ", intId);
+                        Log.d("mytag", "view contentDescription "  + view.getContentDescription());
+                        switchActivityIntent.putExtra("currentCardName", view.getContentDescription());
                         CardsListActivity.this.startActivity(switchActivityIntent);
                     }
                 });
                 Log.d("mytag", "bindingCard " + recordIdx + ": " + bindingCard.toString());
-                Log.d("mytag", "bindingCard Width " + recordIdx + ": " + bindingCard.getWidth());
-                Log.d("mytag", "bindingCard Alpha " + recordIdx + ": " + bindingCard.getAlpha());
-                Log.d("mytag", "bindingCard getVisibility " + recordIdx + ": " + bindingCard.getVisibility());
-                Log.d("mytag", "bindingCard getHeight " + recordIdx + ": " + bindingCard.getHeight());
-                Log.d("mytag", "bindingCard getImageAlpha " + recordIdx + ": " + bindingCard.getImageAlpha());
-                Log.d("mytag", "bindingCard getHeight " + recordIdx + ": " + bindingCard.getLayoutParams().height);
-                Log.d("mytag", "bindingCard getHeight " + recordIdx + ": " + bindingCard.getLayoutParams().width);
+                Log.d("mytag", "bindingCard contentDescription " + recordIdx + ": " + bindingCard.getContentDescription());
                 if (recordIdx < DatabaseUtils.queryNumEntries(db, "smartcards") - 1) {
                     mycards.moveToNext();
                 }

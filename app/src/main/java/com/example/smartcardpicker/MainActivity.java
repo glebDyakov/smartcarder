@@ -1,13 +1,19 @@
 package com.example.smartcardpicker;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -28,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,23 +63,65 @@ public class MainActivity extends AppCompatActivity {
 
         // дальше я дописываю своё
 //
+
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
             TextView smartCardName = findViewById(R.id.smartCardName);
-            smartCardName.setText(extras.getString("currentCardName"));
-            TextView barCodeText = findViewById(R.id.barCodeText);
-            barCodeText.setText(extras.getString("currentBarCode"));
-            if(extras.getString("currentCardType").contains("five")){
-                ImageView smartCardImg = findViewById(R.id.smartCardImg);
-                smartCardImg.setImageResource(R.drawable.five);
-            } else if(extras.getString("currentCardType").contains("cross")){
-                ImageView smartCardImg = findViewById(R.id.smartCardImg);
-                smartCardImg.setImageResource(R.drawable.cross);
-            } else if(extras.getString("currentCardType").contains("magnet")){
-                ImageView smartCardImg = findViewById(R.id.smartCardImg);
-                smartCardImg.setImageResource(R.drawable.magnet);
+
+            //            Log.d("mytag", String.valueOf(extras.getInt("currentCardId")));
+//            Log.d("mytag", extras.getString("currentCardName"));
+
+
+            @SuppressLint("WrongConstant") SQLiteDatabase db = openOrCreateDatabase("cardbinderdb.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
+//            Cursor currentCard = db.rawQuery("Select * from smartcards where _id=" + extras.getInt("currentCardId"), null);
+            Cursor currentCard = db.rawQuery("Select * from smartcards", null);
+            currentCard.moveToFirst();
+            String extaCardName = extras.getString("currentCardName");
+            for(int cardidx = 0; cardidx < DatabaseUtils.queryNumEntries(db, "smartcards"); cardidx++){
+
+
+                Log.d("mytag", "cardidx: " + cardidx + "| cardid: " + String.valueOf(currentCard.getInt(0)));
+//                Log.d("mytag", "extrasId: " + String.valueOf(extras.getInt("currentCardId")));
+                Log.d("mytag", "extrasName: " + extaCardName);
+
+                if(extaCardName.contains(currentCard.getString(1))){
+                    smartCardName.setText(currentCard.getString(1));
+                    TextView barCodeText = findViewById(R.id.barCodeText);
+                    barCodeText.setText(currentCard.getString(2));
+                    if(currentCard.getString(3).contains("five")){
+                        ImageView smartCardImg = findViewById(R.id.smartCardImg);
+                        smartCardImg.setImageResource(R.drawable.five);
+                    } else if(currentCard.getString(3).contains("cross")){
+                        ImageView smartCardImg = findViewById(R.id.smartCardImg);
+                        smartCardImg.setImageResource(R.drawable.cross);
+                    } else if(currentCard.getString(3).contains("magnet")){
+                        ImageView smartCardImg = findViewById(R.id.smartCardImg);
+                        smartCardImg.setImageResource(R.drawable.magnet);
+                    }
+                    break;
+                }
+                currentCard.moveToNext();
             }
+
         }
+
+//        Bundle extras = getIntent().getExtras();
+//        if(extras != null) {
+//            TextView smartCardName = findViewById(R.id.smartCardName);
+//            smartCardName.setText(extras.getString("currentCardName"));
+//            TextView barCodeText = findViewById(R.id.barCodeText);
+//            barCodeText.setText(extras.getString("currentBarCode"));
+//            if(extras.getString("currentCardType").contains("five")){
+//                ImageView smartCardImg = findViewById(R.id.smartCardImg);
+//                smartCardImg.setImageResource(R.drawable.five);
+//            } else if(extras.getString("currentCardType").contains("cross")){
+//                ImageView smartCardImg = findViewById(R.id.smartCardImg);
+//                smartCardImg.setImageResource(R.drawable.cross);
+//            } else if(extras.getString("currentCardType").contains("magnet")){
+//                ImageView smartCardImg = findViewById(R.id.smartCardImg);
+//                smartCardImg.setImageResource(R.drawable.magnet);
+//            }
+//        }
 
 
     }
