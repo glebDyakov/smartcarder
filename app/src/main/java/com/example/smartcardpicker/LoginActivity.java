@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         db = openOrCreateDatabase("cardbinderdb.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
+//        db.execSQL("DROP TABLE IF EXISTS smartcards");
         db.execSQL("CREATE TABLE IF NOT EXISTS passwords (_id INTEGER PRIMARY KEY AUTOINCREMENT, password TEXT);");
         if(DatabaseUtils.queryNumEntries(db, "passwords") >= 1) {
             needPassword = false;

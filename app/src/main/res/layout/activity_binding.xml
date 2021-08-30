@@ -68,7 +68,6 @@
         android:ems="10"
         android:focusableInTouchMode="true"
         android:importantForAutofill="no"
-        android:inputType="number"
         android:minHeight="48dp"
         android:selectAllOnFocus="false"
         android:textAlignment="center"

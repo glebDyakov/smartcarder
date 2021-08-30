@@ -33,7 +33,8 @@ public class CardsListActivity extends AppCompatActivity {
         addCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent switchActivityIntent = new Intent(CardsListActivity.this, BindingActivity.class);
+//                Intent switchActivityIntent = new Intent(CardsListActivity.this, BindingActivity.class);
+                Intent switchActivityIntent = new Intent(CardsListActivity.this, CardTypes.class);
                 CardsListActivity.this.startActivity(switchActivityIntent);
             }
         });
@@ -69,53 +70,58 @@ public class CardsListActivity extends AppCompatActivity {
 //        });
 
         db = openOrCreateDatabase("cardbinderdb.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
+        @SuppressLint("WrongConstant") SQLiteDatabase db = openOrCreateDatabase("cardbinderdb.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS smartcards (_id INTEGER PRIMARY KEY AUTOINCREMENT, cardname TEXT, barcode TEXT, cardtype TEXT);");
+        Log.d("myTag", "db.numberOfRows(): " + (int) DatabaseUtils.queryNumEntries(db, "smartcards"));
         Cursor mycards = db.rawQuery("Select * from smartcards", null);
         mycards.moveToFirst();
-        @SuppressLint("WrongConstant") SQLiteDatabase db = openOrCreateDatabase("cardbinderdb.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS smartcards (_id INTEGER PRIMARY KEY AUTOINCREMENT, cardname TEXT, barcode TEXT);");
-        Log.d("myTag", "db.numberOfRows(): " + (int) DatabaseUtils.queryNumEntries(db, "smartcards"));
-        for(int recordIdx = 0; recordIdx < DatabaseUtils.queryNumEntries(db, "smartcards"); recordIdx++) {
-            ImageButton bindingCard = new ImageButton(CardsListActivity.this);
-//            bindingCard.setBackgroundColor(android.graphics.Color.rgb(255, 0, 0));
-            bindingCard.setImageResource(R.drawable.five);
-//            bindingCard.setImageResource(700082);
+        if(DatabaseUtils.queryNumEntries(db, "smartcards") >= 1) {
+            for (int recordIdx = 0; recordIdx < DatabaseUtils.queryNumEntries(db, "smartcards"); recordIdx++) {
+                ImageButton bindingCard = new ImageButton(CardsListActivity.this);
+                //            bindingCard.setBackgroundColor(android.graphics.Color.rgb(255, 0, 0));
+                bindingCard.setImageResource(R.drawable.five);
+                //            bindingCard.setImageResource(700082);
 
-            bindingCard.setVisibility(View.VISIBLE);
-//            bindingCard.setLayoutParams(
-//                new LinearLayout.LayoutParams(100,100)
-//            );
-//            LinearLayout scrollLayout = findViewById(R.id.layoutOfCards);
-//            bindingCard.setLayoutParams(
-//                    scrollLayout.getLayoutParams()
-//            );
-            bindingCard.setLayoutParams(
-                    new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.MATCH_PARENT
-                    )
-            );
-            LinearLayout scrollLayout = findViewById(R.id.layoutOfCards);
-            scrollLayout.addView(bindingCard);
-            bindingCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent switchActivityIntent = new Intent(CardsListActivity.this, MainActivity.class);
-                    switchActivityIntent.putExtra("currentCardName", "Пятёрочка");
-                    switchActivityIntent.putExtra("currentBarCode", mycards.getString(2));
-                    CardsListActivity.this.startActivity(switchActivityIntent);
+                bindingCard.setVisibility(View.VISIBLE);
+                //            bindingCard.setLayoutParams(
+                //                new LinearLayout.LayoutParams(100,100)
+                //            );
+                //            LinearLayout scrollLayout = findViewById(R.id.layoutOfCards);
+                //            bindingCard.setLayoutParams(
+                //                    scrollLayout.getLayoutParams()
+                //            );
+                bindingCard.setLayoutParams(
+                        new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT
+                        )
+                );
+                LinearLayout scrollLayout = findViewById(R.id.layoutOfCards);
+                scrollLayout.addView(bindingCard);
+                bindingCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent switchActivityIntent = new Intent(CardsListActivity.this, MainActivity.class);
+                        switchActivityIntent.putExtra("currentCardName", "Пятёрочка");
+                        switchActivityIntent.putExtra("currentBarCode", mycards.getString(2));
+                        switchActivityIntent.putExtra("currentCardType", mycards.getString(3));
+                        CardsListActivity.this.startActivity(switchActivityIntent);
+                    }
+                });
+                Log.d("mytag", "bindingCard " + recordIdx + ": " + bindingCard.toString());
+                Log.d("mytag", "bindingCard Width " + recordIdx + ": " + bindingCard.getWidth());
+                Log.d("mytag", "bindingCard Alpha " + recordIdx + ": " + bindingCard.getAlpha());
+                Log.d("mytag", "bindingCard getVisibility " + recordIdx + ": " + bindingCard.getVisibility());
+                Log.d("mytag", "bindingCard getHeight " + recordIdx + ": " + bindingCard.getHeight());
+                Log.d("mytag", "bindingCard getImageAlpha " + recordIdx + ": " + bindingCard.getImageAlpha());
+                Log.d("mytag", "bindingCard getHeight " + recordIdx + ": " + bindingCard.getLayoutParams().height);
+                Log.d("mytag", "bindingCard getHeight " + recordIdx + ": " + bindingCard.getLayoutParams().width);
+                if (recordIdx < DatabaseUtils.queryNumEntries(db, "smartcards") - 1) {
+                    mycards.moveToNext();
                 }
-            });
-            Log.d("mytag", "bindingCard " + recordIdx + ": " + bindingCard.toString());
-            Log.d("mytag", "bindingCard Width " + recordIdx + ": " + bindingCard.getWidth());
-            Log.d("mytag", "bindingCard Alpha " + recordIdx + ": " + bindingCard.getAlpha());
-            Log.d("mytag", "bindingCard getVisibility " + recordIdx + ": " + bindingCard.getVisibility());
-            Log.d("mytag", "bindingCard getHeight " + recordIdx + ": " + bindingCard.getHeight());
-            Log.d("mytag", "bindingCard getImageAlpha " + recordIdx + ": " + bindingCard.getImageAlpha());
-            Log.d("mytag", "bindingCard getHeight " + recordIdx + ": " + bindingCard.getLayoutParams().height);
-            Log.d("mytag", "bindingCard getHeight " + recordIdx + ": " + bindingCard.getLayoutParams().width);
-            if(recordIdx < DatabaseUtils.queryNumEntries(db, "smartcards") - 1) {
-                mycards.moveToNext();
             }
+        } else if(DatabaseUtils.queryNumEntries(db, "smartcards") <= 0){
+            Log.d("mytag", "Нет ни одной прикрепленной карты");
         }
 
 //        mydb = new DBHelper(CardsListActivity.this);

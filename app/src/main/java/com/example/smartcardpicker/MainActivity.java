@@ -61,13 +61,13 @@ public class MainActivity extends AppCompatActivity {
             smartCardName.setText(extras.getString("currentCardName"));
             TextView barCodeText = findViewById(R.id.barCodeText);
             barCodeText.setText(extras.getString("currentBarCode"));
-            if(extras.getString("currentCardName").contains("Пятёрочка")){
+            if(extras.getString("currentCardType").contains("five")){
                 ImageView smartCardImg = findViewById(R.id.smartCardImg);
                 smartCardImg.setImageResource(R.drawable.five);
-            } else if(extras.getString("currentCardName").contains("Перекрёсток")){
+            } else if(extras.getString("currentCardType").contains("cross")){
                 ImageView smartCardImg = findViewById(R.id.smartCardImg);
                 smartCardImg.setImageResource(R.drawable.cross);
-            } else if(extras.getString("currentCardName").contains("Магнит")){
+            } else if(extras.getString("currentCardType").contains("magnet")){
                 ImageView smartCardImg = findViewById(R.id.smartCardImg);
                 smartCardImg.setImageResource(R.drawable.magnet);
             }
