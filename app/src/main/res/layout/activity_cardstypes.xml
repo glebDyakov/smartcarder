@@ -7,7 +7,7 @@
     >
 
     <ScrollView
-        android:id="@+id/bindingsCards"
+        android:id="@+id/listOfCards"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="true"
@@ -24,7 +24,7 @@
         tools:ignore="SpeakableTextPresentCheck">
 
         <LinearLayout
-            android:id="@+id/layoutOfCards"
+            android:id="@+id/layoutCards"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:isScrollContainer="true"
@@ -32,7 +32,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/fiveCard"
+                android:id="@+id/five"
                 android:layout_width="match_parent"
                 android:layout_height="269dp"
                 android:layout_gravity="clip_horizontal|clip_vertical"
@@ -46,7 +46,7 @@
                 tools:visibility="visible" />
 
             <ImageButton
-                android:id="@+id/crossCard"
+                android:id="@+id/cross"
                 android:layout_width="match_parent"
                 android:layout_height="255dp"
                 android:layout_gravity="clip_horizontal"
@@ -58,7 +58,7 @@
                 tools:visibility="visible" />
 
             <ImageButton
-                android:id="@+id/magnetCard"
+                android:id="@+id/magnet"
                 android:layout_width="match_parent"
                 android:layout_height="186dp"
                 android:layout_gravity="clip_horizontal|clip_vertical"

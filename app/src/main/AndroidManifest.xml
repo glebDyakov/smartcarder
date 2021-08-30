@@ -32,5 +32,8 @@
         <activity
             android:name=".BindingActivity">
         </activity>
+        <activity
+            android:name=".CardTypes">
+        </activity>
     </application>
 </manifest>

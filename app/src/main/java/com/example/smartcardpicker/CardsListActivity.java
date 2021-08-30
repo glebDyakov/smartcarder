@@ -104,7 +104,7 @@ public class CardsListActivity extends AppCompatActivity {
                         Intent switchActivityIntent = new Intent(CardsListActivity.this, MainActivity.class);
                         switchActivityIntent.putExtra("currentCardName", "Пятёрочка");
                         switchActivityIntent.putExtra("currentBarCode", mycards.getString(2));
-                        switchActivityIntent.putExtra("currentCardType", mycards.getString(3));
+//                        switchActivityIntent.putExtra("currentCardType", mycards.getString(3));
                         CardsListActivity.this.startActivity(switchActivityIntent);
                     }
                 });

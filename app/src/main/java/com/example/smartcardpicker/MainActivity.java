@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         // дальше я дописываю своё
+//
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
             TextView smartCardName = findViewById(R.id.smartCardName);
@@ -72,8 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 smartCardImg.setImageResource(R.drawable.magnet);
             }
         }
-
-
 
 
     }

@@ -57,13 +57,15 @@ public class BindingActivity extends AppCompatActivity {
 //                TextView barCode = findViewById(R.id.barCode);
 //                mydb.insertSmartCard("fiveCard", "789123456789");
 
-                TextView smartCardName = findViewById(R.id.smartCardName);
+                TextView smartCardName = findViewById(R.id.newSmartCardName);
                 TextView barCode = findViewById(R.id.barCode);
                 @SuppressLint("WrongConstant") SQLiteDatabase db = openOrCreateDatabase("cardbinderdb.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
                 Bundle extras = getIntent().getExtras();
-                if(extras != null) {
-                    db.execSQL("INSERT INTO \"smartcards\"(cardname, barcode, cardtype) VALUES (" + smartCardName.getText() + ", " + barCode.getText() + ", " + extras.getString("currentCardType") + ");");
-                }
+//                if(extras != null) {
+//                    String cardType = extras.getString("currentCardType").toString();
+//                    db.execSQL("INSERT INTO \"smartcards\"(cardname, barcode, cardtype) VALUES (" + smartCardName.getText().toString() + ", " + barCode.getText().toString() + ", " + cardType + ");");
+//                }
+                db.execSQL("INSERT INTO \"smartcards\"(cardname, barcode) VALUES (" + smartCardName.getText().toString() + ", " + barCode.getText().toString() + ");");
                 Log.d("myTag", "db.numberOfRows(): " + (int) DatabaseUtils.queryNumEntries(db, "smartcards"));
                 Intent switchActivityIntent = new Intent(BindingActivity.this, CardsListActivity.class);
                 BindingActivity.this.startActivity(switchActivityIntent);

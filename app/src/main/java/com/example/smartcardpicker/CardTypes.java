@@ -14,7 +14,7 @@ public class CardTypes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cardstypes);
 
-        ImageButton fiveCard = findViewById(R.id.fiveCard);
+        ImageButton fiveCard = findViewById(R.id.five);
         fiveCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -24,7 +24,7 @@ public class CardTypes extends AppCompatActivity {
             }
         });
 
-        ImageButton crossCard = findViewById(R.id.crossCard);
+        ImageButton crossCard = findViewById(R.id.cross);
         fiveCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,7 +34,7 @@ public class CardTypes extends AppCompatActivity {
             }
         });
 
-        ImageButton magnetCard = findViewById(R.id.magnetCard);
+        ImageButton magnetCard = findViewById(R.id.magnet);
         fiveCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
