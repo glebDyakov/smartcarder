@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -61,11 +62,12 @@ public class BindingActivity extends AppCompatActivity {
                 TextView barCode = findViewById(R.id.barCode);
                 @SuppressLint("WrongConstant") SQLiteDatabase db = openOrCreateDatabase("cardbinderdb.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
                 Bundle extras = getIntent().getExtras();
-//                if(extras != null) {
-//                    String cardType = extras.getString("currentCardType").toString();
-//                    db.execSQL("INSERT INTO \"smartcards\"(cardname, barcode, cardtype) VALUES (" + smartCardName.getText().toString() + ", " + barCode.getText().toString() + ", " + cardType + ");");
-//                }
-                db.execSQL("INSERT INTO \"smartcards\"(cardname, barcode) VALUES (" + smartCardName.getText().toString() + ", " + barCode.getText().toString() + ");");
+                if(extras != null) {
+                    String cardType = extras.getString("currentCardType").toString();
+//                    String cardType = "five";
+                    db.execSQL("INSERT INTO \"smartcards\"(cardname, barcode, cardtype) VALUES (\"" + smartCardName.getText().toString() + "\", \"" + barCode.getText().toString() + "\", \"" + cardType + "\");");
+                }
+//                db.execSQL("INSERT INTO \"smartcards\"(cardname, barcode, cardtype) VALUES (\"a\", \"5\", \"five\");");
                 Log.d("myTag", "db.numberOfRows(): " + (int) DatabaseUtils.queryNumEntries(db, "smartcards"));
                 Intent switchActivityIntent = new Intent(BindingActivity.this, CardsListActivity.class);
                 BindingActivity.this.startActivity(switchActivityIntent);
@@ -73,5 +75,19 @@ public class BindingActivity extends AppCompatActivity {
             }
         });
 
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            String cardType = extras.getString("currentCardType").toString();
+            if (cardType.contains("five")) {
+                ImageView bindingCardImg = findViewById(R.id.bindingCardImg);
+                bindingCardImg.setImageResource(R.drawable.five);
+            } else if (cardType.contains("cross")) {
+                ImageView bindingCardImg = findViewById(R.id.bindingCardImg);
+                bindingCardImg.setImageResource(R.drawable.cross);
+            } else if (cardType.contains("magnet")) {
+                ImageView bindingCardImg = findViewById(R.id.bindingCardImg);
+                bindingCardImg.setImageResource(R.drawable.magnet);
+            }
+        }
     }
 }

@@ -79,7 +79,14 @@ public class CardsListActivity extends AppCompatActivity {
             for (int recordIdx = 0; recordIdx < DatabaseUtils.queryNumEntries(db, "smartcards"); recordIdx++) {
                 ImageButton bindingCard = new ImageButton(CardsListActivity.this);
                 //            bindingCard.setBackgroundColor(android.graphics.Color.rgb(255, 0, 0));
-                bindingCard.setImageResource(R.drawable.five);
+                if(mycards.getString(3).contains("five")) {
+                    bindingCard.setImageResource(R.drawable.five);
+                } else if(mycards.getString(3).contains("cross")) {
+                    bindingCard.setImageResource(R.drawable.cross);
+                } else if(mycards.getString(3).contains("magnet")) {
+                    bindingCard.setImageResource(R.drawable.magnet);
+                }
+
                 //            bindingCard.setImageResource(700082);
 
                 bindingCard.setVisibility(View.VISIBLE);
@@ -102,9 +109,9 @@ public class CardsListActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Intent switchActivityIntent = new Intent(CardsListActivity.this, MainActivity.class);
-                        switchActivityIntent.putExtra("currentCardName", "Пятёрочка");
+                        switchActivityIntent.putExtra("currentCardName", mycards.getString(1));
                         switchActivityIntent.putExtra("currentBarCode", mycards.getString(2));
-//                        switchActivityIntent.putExtra("currentCardType", mycards.getString(3));
+                        switchActivityIntent.putExtra("currentCardType", mycards.getString(3));
                         CardsListActivity.this.startActivity(switchActivityIntent);
                     }
                 });

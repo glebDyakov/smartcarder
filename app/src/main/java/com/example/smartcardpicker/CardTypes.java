@@ -25,7 +25,7 @@ public class CardTypes extends AppCompatActivity {
         });
 
         ImageButton crossCard = findViewById(R.id.cross);
-        fiveCard.setOnClickListener(new View.OnClickListener() {
+        crossCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent switchActivityIntent = new Intent(CardTypes.this, BindingActivity.class);
@@ -35,7 +35,7 @@ public class CardTypes extends AppCompatActivity {
         });
 
         ImageButton magnetCard = findViewById(R.id.magnet);
-        fiveCard.setOnClickListener(new View.OnClickListener() {
+        magnetCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent switchActivityIntent = new Intent(CardTypes.this, BindingActivity.class);

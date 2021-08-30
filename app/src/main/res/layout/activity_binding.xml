@@ -28,6 +28,7 @@
         android:layout_height="145dp"
         android:layout_marginBottom="475dp"
         android:alpha="255"
+        android:contentDescription="TODO"
         android:scaleX="1"
         android:scaleY="1"
         android:translationX="5dp"
@@ -37,9 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/five"
-        tools:visibility="visible"
-        android:contentDescription="TODO" />
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/smartCardNameLabel"
