@@ -106,8 +106,8 @@ public class CardsListActivity extends AppCompatActivity {
                 LinearLayout scrollLayout = findViewById(R.id.layoutOfCards);
                 scrollLayout.addView(bindingCard);
 
-//                bindingCard.setContentDescription(String.valueOf(mycards.getInt(0)));
-                bindingCard.setContentDescription(String.valueOf(mycards.getString(1)));
+                bindingCard.setContentDescription(String.valueOf(mycards.getInt(0)));
+//                bindingCard.setContentDescription(String.valueOf(mycards.getString(1)));
 
 
                 bindingCard.setOnClickListener(new View.OnClickListener() {
@@ -117,10 +117,10 @@ public class CardsListActivity extends AppCompatActivity {
 //                        switchActivityIntent.putExtra("currentCardName", mycards.getString(1));
 //                        switchActivityIntent.putExtra("currentBarCode", mycards.getString(2));
 //                        switchActivityIntent.putExtra("currentCardType", mycards.getString(3));
-//                        Integer intId = Integer.parseInt(view.getContentDescription().toString());
-//                        switchActivityIntent.putExtra("currentCardId: ", intId);
+//                        Integer intId = Integer.valueOf(view.getContentDescription().toString());
+                        switchActivityIntent.putExtra("currentCardId", view.getContentDescription());
                         Log.d("mytag", "view contentDescription "  + view.getContentDescription());
-                        switchActivityIntent.putExtra("currentCardName", view.getContentDescription());
+//                        switchActivityIntent.putExtra("currentCardName", view.getContentDescription());
                         CardsListActivity.this.startActivity(switchActivityIntent);
                     }
                 });

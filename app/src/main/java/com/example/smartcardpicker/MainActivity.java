@@ -76,15 +76,15 @@ public class MainActivity extends AppCompatActivity {
 //            Cursor currentCard = db.rawQuery("Select * from smartcards where _id=" + extras.getInt("currentCardId"), null);
             Cursor currentCard = db.rawQuery("Select * from smartcards", null);
             currentCard.moveToFirst();
-            String extaCardName = extras.getString("currentCardName");
+            String extraCardName = extras.getString("currentCardId");
             for(int cardidx = 0; cardidx < DatabaseUtils.queryNumEntries(db, "smartcards"); cardidx++){
 
 
                 Log.d("mytag", "cardidx: " + cardidx + "| cardid: " + String.valueOf(currentCard.getInt(0)));
-//                Log.d("mytag", "extrasId: " + String.valueOf(extras.getInt("currentCardId")));
-                Log.d("mytag", "extrasName: " + extaCardName);
-
-                if(extaCardName.contains(currentCard.getString(1))){
+                Log.d("mytag", "extrasId: " + extraCardName);
+//                Log.d("mytag", "extrasName: " + extraCardName);
+                Log.d("mytag", "currentCard.getInt(0): " + currentCard.getInt(0));
+                if(extraCardName.contains(String.valueOf(currentCard.getInt(0)).toString())){
                     smartCardName.setText(currentCard.getString(1));
                     TextView barCodeText = findViewById(R.id.barCodeText);
                     barCodeText.setText(currentCard.getString(2));
