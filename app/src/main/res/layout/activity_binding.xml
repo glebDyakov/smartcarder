@@ -10,6 +10,7 @@
         android:layout_width="62dp"
         android:layout_height="42dp"
         android:layout_marginBottom="475dp"
+        android:contentDescription="TODO"
         android:scaleX="1"
         android:scaleY="1"
         android:translationX="155dp"
@@ -19,8 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/camera"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/camera" />
 
     <ImageView
         android:id="@+id/bindingCardImg"
@@ -122,6 +122,16 @@
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck"
         tools:visibility="visible" />
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/scanBarCodeBtn"
